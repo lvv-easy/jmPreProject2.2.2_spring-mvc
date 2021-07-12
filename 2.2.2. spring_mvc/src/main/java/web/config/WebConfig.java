@@ -11,10 +11,14 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
-@Configuration
-@EnableWebMvc
-@ComponentScan("web")
+
+// Конифигурация Spring
+@Configuration          // аннотация - конфигурация Spring
+@EnableWebMvc           // включить аннотации для Spring-MVC
+@ComponentScan("web")   // папка для поиска бинов
 public class WebConfig implements WebMvcConfigurer {
+                        // Имплементируем WebMvcConfigurer, когда нам нужно настроить под себя Spring MVC,
+                        // в данном случае мы хотим использовать не стандартный шаблонизатор - Thymeleaf
 
     private final ApplicationContext applicationContext;
 
@@ -23,6 +27,8 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
+
+    // 3 бина для работы Thymeleaf
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -45,6 +51,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");                         // это добавил kda, для русского текста
+        resolver.setContentType("text/html; charset=UTF-8");            // это добавил kda, для русского текста
         registry.viewResolver(resolver);
     }
 }

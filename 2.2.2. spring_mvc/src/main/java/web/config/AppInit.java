@@ -2,6 +2,10 @@ package web.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
+
+// этот класс заменяет web.xml, т.е. класс реализующий AbstractAnnotationConfigDispatcherServletInitializer
+// здесь
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     // Метод, указывающий на класс конфигурации
